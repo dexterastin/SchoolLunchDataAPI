@@ -19,27 +19,11 @@
 |GET|schulCrseScCode|학교 종류|
 
 1. countryCode
-해당 지역의 이름입니다.
+해당 지역의 교육청 주소입니다.
 
-| 지역 | 코드 |
-| --- | --- |
-| SEOUL | 서울특별시 |
-| INCHEON | 인천광역시 |
-| DAEJEON | 대전광역시 |
-| DAEGU | 대구광역시 |
-| BUSAN | 부산광역시 |
-| ULSAN | 울산광역시 |
-| GWANGJU | 광주광역시 |
-| SEJONG | 세종시 |
-| GYEONGG | 경기도 |
-| KANGWON | 강원도 |
-| JEONBUK | 전라북도 |
-| JEONNAM | 전라남도 |
-| GYEONGBU | 경상북도 |
-| GYEONGNA | 경상남도 |
-| CHUNGBU | 충청북도 |
-| CHUNGNA | 충청남도 |
-| JEJU | 제주도 |
+이부분은 빨리 업데이트하여 API를 사용하시며 불편함이 없도록 하겠습니다.
+
+
 
 2. schulCode
 학교 코드입니다.
