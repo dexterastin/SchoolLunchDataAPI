@@ -1,5 +1,10 @@
 <?php
-//20150930
+//20150930 전체적인 알고리즘 수정
+//20151022 API 파싱 알고리즘 수정
+//20151130 리플레이스 못하는 부분 수정
+//20160323 리플레이스 단어 추가
+//20160328 내일 급식 조회 기능 추가
+
 header("Content-type: application/json; charset=UTF-8");
 
 require "simple_html_dom.php";
@@ -18,9 +23,11 @@ echo "insttNm : " . $insttNm;
 echo "schulCrseScCode : " . $schulCrseScCode;
 */
 
+$tom = 0 + $_GET['tom']; // 다음날 급식 받을시 사용
+
 $MENU_URL = "sts_sci_md00_001.do";  //월별식단표
 $firstDate = date('w',strtotime(date("Y-m-")."1")); //월 첫번째요일
-$todayDate = date("d");  //오늘 일
+$todayDate = date("d") + $tom;  //오늘 일
 //$todayDate = 28;
 $date = $firstDate + $todayDate -1; //몇번째칸
 
@@ -29,11 +36,12 @@ $targetURL = "http://" . $countryCode . "/" . $MENU_URL . "?schulCode=" . $schul
 // echo $targetURL;
 
 $html = file_get_html( $targetURL );
+
 $replace = array("<td>", "</td>", "<div>", "</div>", "<br />", "()");
 
 $foodArr = str_replace($replace, "a", preg_replace("/[0-9]/", "", $html -> find('td')));
 
-$replace2 = array("①", "②", "③", "④", "⑤", "⑥", "⑦", "⑧", "⑨", "⑩", "⑪", "⑫", "⑬", "$" , "*", "/", "&", ";", "=", ",", ">", "<", "\"", ", ");
+$replace2 = array(".", "`", "①", "②", "③", "④", "⑤", "⑥", "⑦", "⑧", "⑨", "⑩", "⑪", "⑫", "⑬", "$" , "*", "/", "&", ";", "=", ",", ">", "<", "\"", ", ");
 
 $str1 = "aaaaaaaaaaaaaaaaaaaaaaaaaa";
 $str = $str1;
@@ -54,6 +62,10 @@ foreach ($foodArr as &$value) {
   if (substr($value, -2)==", ") {
     $value = substr($value, 0, -2);
   }
+
+  $go = array("[고-수제]~", "[고]~", "(고)", "(", ")", "()", "소하"); //리플레이스 되는곳
+
+  $value = str_replace($go, "", $value);
 
   $value = str_replace(", [", "[", $value);
 
