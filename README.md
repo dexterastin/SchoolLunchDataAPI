@@ -17,6 +17,7 @@
 |GET|schulCode|학교 코드|
 | GET |insttNm|학교 이름|
 |GET|schulCrseScCode|학교 종류|
+|GET|tom|다음날 급식|
 
 1. countryCode
 해당 지역의 교육청 주소입니다.
@@ -34,6 +35,9 @@
 
 4. schulCrseScCode
 유치원 = 1, 초등학교 = 2, 중학교 = 3, 고등학교 = 4
+
+5. tom
+다음날 급식을 받을때 1을 넣어줍니다.
 
 ### 출력결과
 Json으로 출력됩니다.
